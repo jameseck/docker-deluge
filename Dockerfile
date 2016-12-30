@@ -13,6 +13,3 @@ RUN \
   chmod -R 0777 /config /torrents
 
 EXPOSE 8112/tcp 53160/tcp 53160/udp 58846/tcp
-
-ENTRYPOINT ["/bin/bash", "-e", "/init/entrypoint"]
-CMD ["run"]
