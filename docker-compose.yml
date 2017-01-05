@@ -5,6 +5,8 @@ services:
     image: jameseckersall/deluge
     user: "100000:100000"
     ports:
-    - 8112:8112
+    - 8080:8080
     - 53160:53160
     - 58846:58846
+    environment:
+      WEB_PORT: 8080
