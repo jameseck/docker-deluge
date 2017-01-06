@@ -12,7 +12,7 @@ RUN \
 COPY files /
 
 RUN \
-  mkdir /torrents && \
+  mkdir /config /torrents && \
   chmod -R 0777 /config /torrents && \
   chmod +x /hooks/supervisord-pre.d/*
 
