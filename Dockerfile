@@ -1,7 +1,6 @@
 FROM jameseckersall/alpine-base:3.5
 MAINTAINER James Eckersall <james.eckersall@gmail.com>
 
-
 RUN \
   echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
   apk update && \
@@ -32,5 +31,6 @@ ENV \
   UPNP=false \
   WEB_PORT=8112
 
+VOLUME [ '/torrents', '/config' ]
 
 EXPOSE 45682 8112/tcp 53160/tcp 53160/udp 58846/tcp
