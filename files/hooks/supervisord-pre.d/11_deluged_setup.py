@@ -19,7 +19,7 @@ def str2bool(v):
 
 config_dir = get_env_or_default('CONFIG_DIR', '/config')
 torrents_dir = get_env_or_default('TORRENTS_DIR', '/torrents')
-listen_ports = map(int, get_env_or_default('LISTEN_PORTS', '6881,6891').split(','))
+listen_ports = map(int, get_env_or_default('LISTEN_PORTS', '6881,6881').split(','))
 daemon_port = int(get_env_or_default('DAEMON_PORT', 58846))
 random_port = str2bool(get_env_or_default('RANDOM_PORT', False))
 upnp = str2bool(get_env_or_default('UPNP', False))
