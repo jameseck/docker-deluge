@@ -31,6 +31,6 @@ ENV \
   UPNP=false \
   WEB_PORT=8112
 
-VOLUME [ '/torrents', '/config' ]
+VOLUME ["/torrents", "/config"]
 
 EXPOSE 45682 8112/tcp 53160/tcp 53160/udp 58846/tcp
