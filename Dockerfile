@@ -25,6 +25,7 @@ ENV \
   LISTEN_PORTS=6881,6891 \
   MOVE_COMPLETED_PATH=/torrents/completed \
   PLUGINS_LOCATION=/config/deluge/plugins \
+  PYTHON_EGG_CACHE=/config/deluge/plugins \
   RANDOM_PORT=false \
   TORRENTFILES_LOCATION=/torrents/.torrents \
   TORRENTS_DIR=/torrents \
