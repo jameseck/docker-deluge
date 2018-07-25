@@ -1,21 +1,27 @@
-FROM jameseckersall/alpine-base:3.5
+FROM alpine
 MAINTAINER James Eckersall <james.eckersall@gmail.com>
 
 RUN \
   echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
   apk update && \
-  apk add py2-pip deluge@testing && \
-  pip install service_identity && \
+  apk add bash curl deluge@testing openvpn py2-pip privoxy rsync supervisor && \
+  chmod -R 0777 /var/log /run && \
   rm -rf /var/cache/apk/*
+
+RUN \
+  pip install automat constantly incremental service_identity
 
 COPY files /
 
 RUN \
   mkdir /config /torrents && \
-  chmod -R 0777 /config /torrents && \
-  chmod +x /hooks/supervisord-pre.d/*
+  chmod -R 0777 /config /torrents /run /var/log && \
+  chmod 0755 /run.sh && \
+  chmod -R 0644 /etc/supervisord.conf /etc/supervisord.d/*.ini && \
+  chmod +x /hooks/*
 
 ENV \
+  SUPERVISORD_LOGLEVEL=info \
   AUTOADD_LOCATION=/torrents/drop \
   CONFIG_DIR=/config \
   DAEMON_PORT=58846 \
@@ -30,8 +36,12 @@ ENV \
   TORRENTFILES_LOCATION=/torrents/.torrents \
   TORRENTS_DIR=/torrents \
   UPNP=false \
-  WEB_PORT=8112
+  WEB_PORT=8112 \
+  DEBUG=false
 
 VOLUME ["/torrents", "/config"]
 
 EXPOSE 45682 8112/tcp 53160/tcp 53160/udp 58846/tcp
+
+ENTRYPOINT ["/bin/bash", "-e", "/init/entrypoint"]
+CMD ["run"]
