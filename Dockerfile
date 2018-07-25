@@ -20,7 +20,6 @@ RUN \
   chmod -R 0644 /etc/supervisord.conf /etc/supervisord.d/*.ini
 
 ENV \
-  SUPERVISORD_LOGLEVEL=info \
   AUTOADD_LOCATION=/torrents/drop \
   CONFIG_DIR=/config \
   DAEMON_PORT=58846 \
@@ -36,7 +35,7 @@ ENV \
   TORRENTS_DIR=/torrents \
   UPNP=false \
   WEB_PORT=8112 \
-  DELUGE_LOGLEVEL=info
+  LOGLEVEL=info
 
 VOLUME ["/torrents", "/config"]
 

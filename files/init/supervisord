@@ -23,7 +23,7 @@ if [ "$supervisord_pre" != "" ]; then
   done
 fi
 
-/usr/bin/supervisord -n -c /etc/supervisord.conf -e ${SUPERVISORD_LOGLEVEL:-error} & PID=$!
+/usr/bin/supervisord -n -c /etc/supervisord.conf -e ${LOGLEVEL:-error} & PID=$!
 
 
 wait
