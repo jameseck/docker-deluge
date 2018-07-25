@@ -23,8 +23,6 @@ if [ "$supervisord_pre" != "" ]; then
   done
 fi
 
-[[ -f "/hooks/supervisord-pre" ]] && echo "The /hooks/supervisord-pre hook has been replaced with /hooks/supervisord-pre.d/*" && exit 1
-
 /usr/bin/supervisord -n -c /etc/supervisord.conf -e ${SUPERVISORD_LOGLEVEL:-error} & PID=$!
 
 

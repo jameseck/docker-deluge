@@ -7,7 +7,8 @@ import deluge.common
 import logging, sys
 from deluge.config import Config
 
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+LOGLEVEL = os.environ.get('DELUGE_LOGLEVEL', 'INFO').upper()
+logging.basicConfig(stream=sys.stderr, level=LOGLEVEL)
 
 def get_env_or_default(var, default):
   v = os.environ.get(var)

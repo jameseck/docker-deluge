@@ -16,9 +16,8 @@ COPY files /
 RUN \
   mkdir /config /torrents && \
   chmod -R 0777 /config /torrents /run /var/log && \
-  chmod 0755 /run.sh && \
-  chmod -R 0644 /etc/supervisord.conf /etc/supervisord.d/*.ini && \
-  chmod +x /hooks/*
+  chmod -R 0755 /hooks/ && \
+  chmod -R 0644 /etc/supervisord.conf /etc/supervisord.d/*.ini
 
 ENV \
   SUPERVISORD_LOGLEVEL=info \
@@ -37,7 +36,7 @@ ENV \
   TORRENTS_DIR=/torrents \
   UPNP=false \
   WEB_PORT=8112 \
-  DEBUG=false
+  DELUGE_LOGLEVEL=info
 
 VOLUME ["/torrents", "/config"]
 
