@@ -15,7 +15,7 @@ COPY files /
 
 RUN \
   mkdir /config /torrents && \
-  chmod -R 0777 /config /torrents /run /var/log && \
+  chmod -R 0777 /config /scripts /torrents /run /var/log && \
   chmod -R 0755 /hooks/ && \
   chmod -R 0644 /etc/supervisord.conf /etc/supervisord.d/*.ini
 

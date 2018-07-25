@@ -31,7 +31,7 @@ check_depending_env () {
 
 # Set exec-bit automatic. When adding hooks in a Dockerfile, we shouln't also have to think about setting +x
 # in the Dockerfile for the same file. If you want to disable a hook, rename it.
-chmod +x /init/setup /hooks/{entrypoint-pre.d/*,entrypoint-run,entrypoint-exec,supervisord-pre.d/*,supervisord-ready} 2> /dev/null || true
+chmod +x /scripts/* /init/setup /hooks/{entrypoint-pre.d/*,entrypoint-run,entrypoint-exec,supervisord-pre.d/*,supervisord-ready} 2> /dev/null || true
 
 entrypoint_pre=$(ls /hooks/entrypoint-pre.d/* 2>/dev/null | sort -n )
 if [ "$entrypoint_pre" != "" ]; then
