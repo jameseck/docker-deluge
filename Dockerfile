@@ -4,7 +4,12 @@ MAINTAINER James Eckersall <james.eckersall@gmail.com>
 RUN \
   echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
   apk update && \
+<<<<<<< HEAD
   apk add bash curl deluge@testing openvpn py2-pip privoxy rsync supervisor strongswan xl2tpd ppp && \
+=======
+  apk add bash bind-tools curl deluge@testing grep openvpn py2-pip privoxy rsync sed supervisor && \
+  chmod -R 0777 /var/log /run && \
+>>>>>>> 0749f160f2191510b9f7ccc9b49d27b218ebdeba
   rm -rf /var/cache/apk/*
 
 RUN \
@@ -37,10 +42,17 @@ ENV \
   UPNP=false \
   WEB_PORT=8112 \
   LOGLEVEL=info \
-  VPN_SERVER_IPV4='' \
   VPN_PSK='torguard' \
-  VPN_USERNAME='' \
-  VPN_PASSWORD='' \
+  LAN_NETWORK=192.168.0.0/16 \
+  NAME_SERVERS=8.8.8.8,9.9.9.9 \
+  VPN_CONFIG=/config/openvpn/openvpn.ovpn \
+  VPN_DEVICE_TYPE=tun \
+  VPN_PROV=tg \
+  VPN_REMOTE=88.150.157.14 \
+  VPN_REMOTE_PORT=1912 \
+  VPN_PROTOCOL=udp \
+  VPN_USERNAME=bob \
+  VPN_PASSWORD=pass
 
 VOLUME ["/torrents", "/config"]
 
