@@ -1,11 +1,10 @@
-FROM alpine
+FROM alpine:edge
 MAINTAINER James Eckersall <james.eckersall@gmail.com>
 
 RUN \
   echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
   apk update && \
-  apk add bash curl deluge@testing openvpn py2-pip privoxy rsync supervisor && \
-  chmod -R 0777 /var/log /run && \
+  apk add bash curl deluge@testing openvpn py2-pip privoxy rsync supervisor strongswan xl2tpd ppp && \
   rm -rf /var/cache/apk/*
 
 RUN \
@@ -14,7 +13,9 @@ RUN \
 COPY files /
 
 RUN \
-  mkdir /config /torrents && \
+  mkdir -p /var/run/xl2tpd /config /torrents && \
+  touch /var/run/xl2tpd/l2tp-control && \
+  chmod -R 0777 /var/log /run && \
   chmod -R 0777 /config /scripts /torrents /run /var/log && \
   chmod -R 0755 /hooks/ && \
   chmod -R 0644 /etc/supervisord.conf /etc/supervisord.d/*.ini
@@ -35,7 +36,11 @@ ENV \
   TORRENTS_DIR=/torrents \
   UPNP=false \
   WEB_PORT=8112 \
-  LOGLEVEL=info
+  LOGLEVEL=info \
+  VPN_SERVER_IPV4='' \
+  VPN_PSK='torguard' \
+  VPN_USERNAME='' \
+  VPN_PASSWORD='' \
 
 VOLUME ["/torrents", "/config"]
 
