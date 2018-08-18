@@ -40,9 +40,10 @@ ENV \
   NAME_SERVERS=8.8.8.8,9.9.9.9 \
   VPN_CONFIG=/config/openvpn/openvpn.ovpn \
   VPN_DEVICE_TYPE=tun \
-  VPN_PROV=pia \
-  VPN_REMOTE=uk-london.privateinternetaccess.com \
-  VPN_REMOTE_PORT=1198 \
+  VPN_PROV=tg \
+  VPN_REMOTE=88.150.157.14 \
+  VPN_REMOTE_PORT=1912 \
+  VPN_PROTOCOL=udp \
   VPN_USERNAME=bob \
   VPN_PASSWORD=pass
 

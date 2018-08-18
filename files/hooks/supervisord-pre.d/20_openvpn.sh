@@ -1,9 +1,29 @@
 #!/bin/sh
 
+DEST_DIR=/config/openvpn
+
+case ${VPN_PROV} in
+  pia)
+    SRC_DIR="/openvpn/pia"
+    FILES="openvpn.ovpn crl.rsa.2048.pem ca.rsa.2048.crt"
+    ;;
+  tg)
+    SRC_DIR="/openvpn/tg"
+    FILES="openvpn.ovpn"
+    ;;
+  *)
+    echo "VPN provider ${VPN_PROV} not supported"
+    exit 1
+    ;;
+esac
+
 [ ! -d /config/openvpn ] && mkdir --mode=0775 /config/openvpn
-[ ! -f /config/openvpn/openvpn.ovpn ]     && cp /openvpn/openvpn.ovpn     /config/openvpn/
-[ ! -f /config/openvpn/crl.rsa.2048.pem ] && cp /openvpn/crl.rsa.2048.pem /config/openvpn/
-[ ! -f /config/openvpn/ca.rsa.2048.crt ]  && cp /openvpn/ca.rsa.2048.crt  /config/openvpn/
+
+for f in $FILES; do
+  if [ ! -f "${DEST_DIR}${f}" ]; then
+    cp $SRC_DIR/${f} $DEST_DIR/
+  fi
+done
 
 sed -i -e "s/^remote .*$/remote $VPN_REMOTE $VPN_REMOTE_PORT/" /config/openvpn/openvpn.ovpn
 sed -i -e 's/^auth-user-pass.*$/auth-user-pass \/config\/openvpn\/login.conf/' /config/openvpn/openvpn.ovpn
